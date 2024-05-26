@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellKnownDataTypes", "WellKnownDataTypes\WellKnownDataTypes.csproj", "{400DFDD7-7D74-4029-9996-6F074D678CBD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WellKnownDataTypes-Tests", "WellKnownDataTypes-Tests\WellKnownDataTypes-Tests.csproj", "{C5DF42E5-9900-41DE-948E-9D9AD91D0B7C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{400DFDD7-7D74-4029-9996-6F074D678CBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{400DFDD7-7D74-4029-9996-6F074D678CBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{400DFDD7-7D74-4029-9996-6F074D678CBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{400DFDD7-7D74-4029-9996-6F074D678CBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5DF42E5-9900-41DE-948E-9D9AD91D0B7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5DF42E5-9900-41DE-948E-9D9AD91D0B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5DF42E5-9900-41DE-948E-9D9AD91D0B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5DF42E5-9900-41DE-948E-9D9AD91D0B7C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51D8408E-EE9F-419C-88A7-B3AC309970B1}
+	EndGlobalSection
+EndGlobal

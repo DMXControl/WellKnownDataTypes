@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	<TargetFrameworks>netstandard2.0;net6.0;net7.0;net8.0</TargetFrameworks>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+	<Version>0.0.1</Version>
+	<RepositoryUrl>https://github.com/DMXControl/WellKnownDataTypes</RepositoryUrl>
+	<PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageId>DMXControlProjects.$(AssemblyName)</PackageId>
+	<Title>$(AssemblyName)</Title>
+	<Copyright>Copyright © DMXControl Projects e.V. 2024</Copyright>
+	<Company>DMXControl-Projects e.V.</Company>
+	<Authors>Patrick Grote</Authors>
+	<LangVersion>latest</LangVersion>
+	<RootNamespace>org.dmxc.wkdt</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Audio\" />
+    <Folder Include="Video\" />
+  </ItemGroup>
+  <ItemGroup>
+	<None Include="..\LICENSE">
+	  <Pack>True</Pack>
+	  <PackagePath>\</PackagePath>
+	</None>
+	<None Include="..\README.md">
+	  <Pack>True</Pack>
+	  <PackagePath>\</PackagePath>
+	</None>
+  </ItemGroup>
+</Project>

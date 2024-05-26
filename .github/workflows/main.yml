@@ -1,0 +1,43 @@
+name: Build & Test
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+        
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        dotnet-version: [ '6.0', '7.0', '8.0' ]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4.1.1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --framework net${{ matrix.dotnet-version }} --collect:"XPlat Code Coverage" --no-restore --verbosity normal --logger trx --results-directory "TestResults-${{ matrix.os }} ${{ matrix.dotnet-version }}"
+    - name: Upload a Build Artifact
+      if: ${{ failure() || success() }}
+      uses: actions/upload-artifact@v4.3.1
+      with:
+        name: ${{ matrix.os }} ${{ matrix.dotnet-version }}
+        path: |
+          WellKnownDataTypes-Tests/bin/*/net${{ matrix.dotnet-version }}/log.txt
+          TestResults-${{ matrix.os }} ${{ matrix.dotnet-version }}
+          WellKnownDataTypes/bin/Release/net${{ matrix.dotnet-version }}/WellKnownDataTypes.dll
+        retention-days: 2
+      continue-on-error: true
+
