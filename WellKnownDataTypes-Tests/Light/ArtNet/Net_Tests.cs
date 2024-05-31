@@ -48,5 +48,16 @@ namespace org.dmxc.wkdt.Tests.Light.ArtNet
                 Assert.That(new Net(1).Equals((Net)2), Is.False);
             });
         }
+
+        [Test]
+        public void TestSerializable()
+        {
+            Net net = new Net(2);
+            var data = Tools.Serialize(net);
+            string json = System.Text.Encoding.Default.GetString(data);
+            Net result = Tools.Deserialize<Net>(data);
+
+            Assert.That(result, Is.EqualTo(net), json);
+        }
     }
 }

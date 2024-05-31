@@ -1,13 +1,19 @@
-﻿using System;
-
-namespace org.dmxc.wkdt.Light.ArtNet
+﻿namespace org.dmxc.wkdt.Light.ArtNet
 {
+    [Serializable]
     public readonly struct Subnet : IEquatable<Subnet>, IComparable<Subnet>
     {
         public static readonly Subnet Default = new Subnet();
+
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte Value;
 
-        public Subnet(in byte value)
+#if NET8_0_OR_GREATER
+        [JsonConstructor]
+#endif
+        public Subnet(byte value)
         {
             if ((byte)(value & 0x0f) != value)
                 throw new ArgumentException($"Value (0x{value:x}) out of range! A valid value is between 0x00 and 0x0f.");

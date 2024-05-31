@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace org.dmxc.wkdt.Light.RDM
 {
+    [Serializable]
     public readonly struct UID : IEquatable<UID>, IComparer<UID>, IComparable<UID>
     {
         public static readonly UID Empty = new UID((ushort)0, 0);
@@ -12,10 +12,23 @@ namespace org.dmxc.wkdt.Light.RDM
 
         private static readonly Regex regex6g = new Regex(@"^([A-Fa-f0-9]{1,4})[\:\.\-\s]([A-Fa-f0-9]{1,8})$");
         private static readonly Regex regex0g = new Regex(@"^([0-9A-Fa-f]{4})([0-9A-Fa-f]{8})$");
-
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public readonly ushort ManufacturerID;
+        //#if NET8_0_OR_GREATER
+        //        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+        //#endif
         //public EManufacturer Manufacturer => (EManufacturer)ManufacturerID;
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public readonly uint DeviceID;
+
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
+        public readonly ulong Uid;
         public UID(in string uid)
         {
             var match = regex6g.Match(uid);
@@ -26,6 +39,7 @@ namespace org.dmxc.wkdt.Light.RDM
             {
                 ManufacturerID = Convert.ToUInt16(match.Groups[1].Value, 16);
                 DeviceID = Convert.ToUInt32(match.Groups[2].Value, 16);
+                Uid = (ulong)this;
             }
             else
                 throw new FormatException($"The given string\"{uid}\" is not matchable to any known RDM-UID format");
@@ -33,13 +47,18 @@ namespace org.dmxc.wkdt.Light.RDM
         //public UID(in EManufacturer manufacturer, in uint deviceId) : this((ushort)manufacturer, deviceId)
         //{
         //}
-        public UID(in ulong uid) : this((ushort)(uid >> 32), (uint)uid)
+
+#if NET8_0_OR_GREATER
+        [JsonConstructor]
+#endif
+        public UID(ulong uid) : this((ushort)(uid >> 32), (uint)uid)
         {
         }
         public UID(in ushort manId, in uint deviceId)
         {
             ManufacturerID = manId;
             DeviceID = deviceId;
+            Uid = (ulong)this;
         }
 
         public static UID CreateManufacturerBroadcast(in ushort manId)
@@ -162,7 +181,9 @@ namespace org.dmxc.wkdt.Light.RDM
         {
             return ((ulong)x).CompareTo((ulong)y);
         }
-
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public bool IsBroadcast
         {
             get
@@ -170,6 +191,9 @@ namespace org.dmxc.wkdt.Light.RDM
                 return DeviceID == 0xFFFFFFFF;
             }
         }
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public bool IsValidDeviceUID
         {
             get

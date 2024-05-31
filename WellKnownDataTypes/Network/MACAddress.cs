@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace org.dmxc.wkdt.Network
 {
+    [Serializable]
     public readonly struct MACAddress : IEquatable<MACAddress>
     {
         public static readonly MACAddress Empty = new MACAddress(0, 0, 0, 0, 0, 0);
@@ -13,14 +13,36 @@ namespace org.dmxc.wkdt.Network
         private static readonly Regex regex3g = new Regex(@"^([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})\.([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})\.([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$");
         private static readonly Regex regex0g = new Regex(@"^([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$");
 
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B1;
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B2;
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B3;
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B4;
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B5;
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B6;
 
-        public MACAddress(in byte b1, in byte b2, in byte b3, in byte b4, in byte b5, in byte b6)
+
+#if NET8_0_OR_GREATER
+        [JsonConstructor]
+#endif
+        public MACAddress(byte b1, byte b2, byte b3, byte b4, byte b5, byte b6)
         {
             this.B1 = b1;
             this.B2 = b2;

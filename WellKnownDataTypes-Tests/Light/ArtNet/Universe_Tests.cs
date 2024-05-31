@@ -49,5 +49,15 @@ namespace org.dmxc.wkdt.Tests.Light.ArtNet
                 Assert.That(new Universe(0).Equals(Universe.Default), Is.True);
             });
         }
+        [Test]
+        public void TestSerializable()
+        {
+            Universe universe = new Universe(13);
+            var data = Tools.Serialize(universe);
+            string json = System.Text.Encoding.Default.GetString(data);
+            Universe result = Tools.Deserialize<Universe>(data);
+
+            Assert.That(result, Is.EqualTo(universe), json);
+        }
     }
 }

@@ -1,15 +1,4 @@
 global using NUnit.Framework;
-
-/* Nicht gemergte Änderung aus Projekt "WellKnownDataTypes-Tests (net7.0)"
-Vor:
-global using org.dmxc.wkdt;
-Nach:
-global using System;
-*/
-
-/* Nicht gemergte Änderung aus Projekt "WellKnownDataTypes-Tests (net8.0)"
-Vor:
-global using org.dmxc.wkdt;
-Nach:
-global using System;
-*/
+global using System.Buffers.Text;
+global using System.Runtime.Serialization.Formatters.Binary;
+global using System.Text.Json;

@@ -1,12 +1,18 @@
-﻿using System;
-
-namespace org.dmxc.wkdt.Light.ArtNet
+﻿namespace org.dmxc.wkdt.Light.ArtNet
 {
+    [Serializable]
     public readonly struct Net : IEquatable<Net>, IComparable<Net>
     {
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte Value;
 
-        public Net(in byte value)
+
+#if NET8_0_OR_GREATER
+        [JsonConstructor]
+#endif
+        public Net(byte value)
         {
             if ((byte)(value & 0x7f) != value)
                 throw new ArgumentException($"Value (0x{value:x}) out of range! A valid value is between 0x00 and 0x7f.");

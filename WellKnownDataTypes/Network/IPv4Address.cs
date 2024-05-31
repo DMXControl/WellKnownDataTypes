@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 
 namespace org.dmxc.wkdt.Network
 {
+    [Serializable]
     public readonly struct IPv4Address : IEquatable<IPv4Address>
     {
         public static IPv4Address Empty { get => new IPv4Address(0, 0, 0, 0); }
@@ -13,17 +13,33 @@ namespace org.dmxc.wkdt.Network
 
         private static readonly Regex regex = new Regex(@"^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$");
 
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B1;
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B2;
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B3;
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte B4;
 
-        public IPv4Address(in byte block1, in byte block2, in byte block3, in byte block4)
+
+#if NET8_0_OR_GREATER
+        [JsonConstructor]
+#endif
+        public IPv4Address(byte b1, byte b2, byte b3, byte b4)
         {
-            B1 = block1;
-            B2 = block2;
-            B3 = block3;
-            B4 = block4;
+            B1 = b1;
+            B2 = b2;
+            B3 = b3;
+            B4 = b4;
         }
         public IPv4Address(in string ipAddress) : this()
         {

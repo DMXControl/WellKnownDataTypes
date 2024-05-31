@@ -53,5 +53,16 @@ namespace org.dmxc.wkdt.Tests.Network
                                     }
             });
         }
+
+        [Test]
+        public void TestSerializable()
+        {
+            MACAddress macAddress = new MACAddress("aa:bb:cc:dD:Ee:fF");
+            var data = Tools.Serialize(macAddress);
+            string json = System.Text.Encoding.Default.GetString(data);
+            MACAddress result = Tools.Deserialize<MACAddress>(data);
+
+            Assert.That(result, Is.EqualTo(macAddress), json);
+        }
     }
 }

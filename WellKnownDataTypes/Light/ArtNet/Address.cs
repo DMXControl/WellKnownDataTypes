@@ -1,11 +1,20 @@
-﻿using System;
-
-namespace org.dmxc.wkdt.Light.ArtNet
+﻿namespace org.dmxc.wkdt.Light.ArtNet
 {
+    [Serializable]
     public readonly struct Address : IEquatable<Address>, IComparable<Address>
     {
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public readonly Subnet Subnet;
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public readonly Universe Universe;
+
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly byte Combined;
 
         public Address(in Subnet subnet, in Universe universe)
@@ -14,7 +23,11 @@ namespace org.dmxc.wkdt.Light.ArtNet
             Universe = universe;
             Combined = (byte)((Subnet & 0xf) << 4 | (Universe & 0xf));
         }
-        public Address(in byte combined)
+
+#if NET8_0_OR_GREATER
+        [JsonConstructor]
+#endif
+        public Address(byte combined)
         {
             Subnet = (Subnet)((combined >> 4) & 0xf);
             Universe = (Universe)(combined & 0xf);

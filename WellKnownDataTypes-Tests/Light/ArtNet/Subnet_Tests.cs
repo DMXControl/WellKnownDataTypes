@@ -50,5 +50,15 @@ namespace org.dmxc.wkdt.Tests.Light.ArtNet
                 Assert.That(new Subnet(0).Equals(Subnet.Default), Is.True);
             });
         }
+        [Test]
+        public void TestSerializable()
+        {
+            Subnet subnet = new Subnet(13);
+            var data = Tools.Serialize(subnet);
+            string json = System.Text.Encoding.Default.GetString(data);
+            Subnet result = Tools.Deserialize<Subnet>(data);
+
+            Assert.That(result, Is.EqualTo(subnet), json);
+        }
     }
 }

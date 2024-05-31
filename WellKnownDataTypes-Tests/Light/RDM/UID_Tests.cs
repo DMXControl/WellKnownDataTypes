@@ -110,5 +110,15 @@ namespace org.dmxc.wkdt.Tests.Light.RDM
                 Assert.That(new UID(0).Equals(UID.Empty), Is.True);
             });
         }
+        [Test]
+        public void TestSerializable()
+        {
+            UID uid = new UID("1234:12345678");
+            var data = Tools.Serialize(uid);
+            string json = System.Text.Encoding.Default.GetString(data);
+            UID result = Tools.Deserialize<UID>(data);
+
+            Assert.That(result, Is.EqualTo(uid), json);
+        }
     }
 }

@@ -52,5 +52,16 @@ namespace org.dmxc.wkdt.Tests.Light.ArtNet
                 Assert.That(new PortAddress(1).Equals((PortAddress)2), Is.False);
             });
         }
+
+        [Test]
+        public void TestSerializable()
+        {
+            PortAddress portAddress = new PortAddress(2,3,4);
+            var data = Tools.Serialize(portAddress);
+            string json = System.Text.Encoding.Default.GetString(data);
+            PortAddress result = Tools.Deserialize<PortAddress>(data);
+
+            Assert.That(result, Is.EqualTo(portAddress), json);
+        }
     }
 }

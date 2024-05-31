@@ -1,13 +1,28 @@
-﻿using System;
-
-namespace org.dmxc.wkdt.Light.ArtNet
+﻿namespace org.dmxc.wkdt.Light.ArtNet
 {
+    [Serializable]
     public readonly struct PortAddress : IEquatable<PortAddress>, IComparable<PortAddress>
     {
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public readonly Net Net;
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public readonly Subnet Subnet;
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public readonly Universe Universe;
+#if NET8_0_OR_GREATER
+        [JsonIgnore(Condition = JsonIgnoreCondition.Always)]
+#endif
         public readonly Address Address;
+
+#if NET8_0_OR_GREATER
+        [JsonInclude]
+#endif
         public readonly ushort Combined;
 
         public PortAddress(in Net net, in Subnet subnet, in Universe universe)
@@ -18,7 +33,11 @@ namespace org.dmxc.wkdt.Light.ArtNet
             Address = new Address(subnet, universe);
             Combined = (ushort)((Net << 8) + Address.Combined);
         }
-        public PortAddress(in ushort combined)
+
+#if NET8_0_OR_GREATER
+        [JsonConstructor]
+#endif
+        public PortAddress(ushort combined)
         {
             if ((ushort)(combined & 0x7fff) != combined)
                 throw new ArgumentException($"Value (0x{combined:x}) out of range! A valid value is between 0x0000 and 0x7fff.");

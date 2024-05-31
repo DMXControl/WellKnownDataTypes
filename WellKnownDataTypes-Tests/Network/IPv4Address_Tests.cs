@@ -61,5 +61,16 @@ namespace org.dmxc.wkdt.Tests.Network
                 Assert.Throws(typeof(ArgumentException), () => { var ip = (IPv4Address)System.Net.IPAddress.IPv6Any; });
             });
         }
+
+        [Test]
+        public void TestSerializable()
+        {
+            IPv4Address ipv4Address = new IPv4Address("192.168.178.33");
+            var data = Tools.Serialize(ipv4Address);
+            string json = System.Text.Encoding.Default.GetString(data);
+            IPv4Address result = Tools.Deserialize<IPv4Address>(data);
+
+            Assert.That(result, Is.EqualTo(ipv4Address), json);
+        }
     }
 }
