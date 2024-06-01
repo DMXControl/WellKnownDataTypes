@@ -1,5 +1,4 @@
 using org.dmxc.wkdt.Light.ArtNet;
-using org.dmxc.wkdt.Tests;
 
 namespace org.dmxc.wkdt.Tests.Light.ArtNet
 {
@@ -66,7 +65,7 @@ namespace org.dmxc.wkdt.Tests.Light.ArtNet
         {
             Address address = new Address(2, 3);
             var data = Tools.Serialize(address);
-            string json= System.Text.Encoding.Default.GetString(data);
+            string json = System.Text.Encoding.Default.GetString(data);
             Address result = Tools.Deserialize<Address>(data);
 
             Assert.That(result, Is.EqualTo(address), json);
