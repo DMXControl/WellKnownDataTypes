@@ -42,7 +42,11 @@
         }
         public override string ToString()
         {
-            return $"Net: {Value}(0x{Value:x})";
+            return Value.ToString();
+        }
+        public string ToStringDetailed()
+        {
+            return $"Net: {Value}(0x{Value:x2})";
         }
 
         public static bool operator ==(in Net a, in Net b)

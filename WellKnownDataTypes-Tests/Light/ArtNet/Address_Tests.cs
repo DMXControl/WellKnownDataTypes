@@ -46,6 +46,14 @@ namespace org.dmxc.wkdt.Tests.Light.ArtNet
                 Assert.That(new Address(16).Equals(null), Is.False);
                 Assert.That(new Address(16), Is.Not.EqualTo(null));
                 Assert.That(new Address(16).ToString(), Is.Not.Empty);
+                Assert.That(new Address(1).ToString, Is.EqualTo("1"));
+                Assert.That(new Address(2).ToString, Is.EqualTo("2"));
+                Assert.That(new Address(1).ToStringDetailed(), Is.EqualTo("Address: 1(0x01) | Subnet: 0(0x0), Universe: 1(0x1)"));
+                Assert.That(new Address(2).ToStringDetailed(), Is.EqualTo("Address: 2(0x02) | Subnet: 0(0x0), Universe: 2(0x2)"));
+                Assert.That(new Address(15).ToStringDetailed(), Is.EqualTo("Address: 15(0x0f) | Subnet: 0(0x0), Universe: 15(0xf)"));
+                Assert.That(new Address(16).ToStringDetailed(), Is.EqualTo("Address: 16(0x10) | Subnet: 1(0x1), Universe: 0(0x0)"));
+                Assert.That(new Address(255).ToStringDetailed(), Is.EqualTo("Address: 255(0xff) | Subnet: 15(0xf), Universe: 15(0xf)"));
+                Assert.That(new Address(0xdd).ToStringDetailed(), Is.EqualTo("Address: 221(0xdd) | Subnet: 13(0xd), Universe: 13(0xd)"));
             });
 
             HashSet<Address> addresses = new HashSet<Address>();

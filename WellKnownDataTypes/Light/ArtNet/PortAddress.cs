@@ -80,7 +80,11 @@
         }
         public override string ToString()
         {
-            return $"{Combined}(0x{Combined:x4}) / {Net}, {Subnet}, {Universe}";
+            return Combined.ToString();
+        }
+        public string ToStringDetailed()
+        {
+            return $"PortAddress: {Combined}(0x{Combined:x4}) | {Net.ToStringDetailed()}, {Subnet.ToStringDetailed()}, {Universe.ToStringDetailed()}";
         }
 
         public static bool operator ==(in PortAddress a, in PortAddress b)

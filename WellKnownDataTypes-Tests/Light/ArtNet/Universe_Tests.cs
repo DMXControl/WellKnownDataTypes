@@ -47,6 +47,12 @@ namespace org.dmxc.wkdt.Tests.Light.ArtNet
                 Assert.That(new Universe(1).Equals((Universe)1), Is.True);
                 Assert.That(new Universe(1).Equals((Universe)2), Is.False);
                 Assert.That(new Universe(0).Equals(Universe.Default), Is.True);
+                Assert.That(new Universe(1).ToString, Is.EqualTo("1"));
+                Assert.That(new Universe(2).ToString, Is.EqualTo("2"));
+                Assert.That(new Universe(1).ToStringDetailed(), Is.EqualTo("Universe: 1(0x1)"));
+                Assert.That(new Universe(2).ToStringDetailed(), Is.EqualTo("Universe: 2(0x2)"));
+                Assert.That(new Universe(15).ToStringDetailed(), Is.EqualTo("Universe: 15(0xf)"));
+                Assert.Throws(typeof(ArgumentException), () => new Universe(16).ToStringDetailed());
             });
         }
         [Test]

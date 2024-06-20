@@ -48,6 +48,12 @@ namespace org.dmxc.wkdt.Tests.Light.ArtNet
                 Assert.That(new Subnet(1).Equals((Subnet)1), Is.True);
                 Assert.That(new Subnet(1).Equals((Subnet)2), Is.False);
                 Assert.That(new Subnet(0).Equals(Subnet.Default), Is.True);
+                Assert.That(new Subnet(1).ToString, Is.EqualTo("1"));
+                Assert.That(new Subnet(2).ToString, Is.EqualTo("2"));
+                Assert.That(new Subnet(1).ToStringDetailed(), Is.EqualTo("Subnet: 1(0x1)"));
+                Assert.That(new Subnet(2).ToStringDetailed(), Is.EqualTo("Subnet: 2(0x2)"));
+                Assert.That(new Subnet(15).ToStringDetailed(), Is.EqualTo("Subnet: 15(0xf)"));
+                Assert.Throws(typeof(ArgumentException), () => new Subnet(16).ToStringDetailed());
             });
         }
         [Test]

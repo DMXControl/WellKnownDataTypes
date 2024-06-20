@@ -43,6 +43,10 @@
         }
         public override string ToString()
         {
+            return Value.ToString();
+        }
+        public string ToStringDetailed()
+        {
             return $"Universe: {Value}(0x{Value:x1})";
         }
 

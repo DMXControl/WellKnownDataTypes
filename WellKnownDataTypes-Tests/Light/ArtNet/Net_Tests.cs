@@ -46,6 +46,12 @@ namespace org.dmxc.wkdt.Tests.Light.ArtNet
                 Assert.That(new Net(1).Equals((object)(Net)1), Is.True);
                 Assert.That(new Net(1).Equals((Net)1), Is.True);
                 Assert.That(new Net(1).Equals((Net)2), Is.False);
+                Assert.That(new Net(1).ToString, Is.EqualTo("1"));
+                Assert.That(new Net(2).ToString, Is.EqualTo("2"));
+                Assert.That(new Net(1).ToStringDetailed(), Is.EqualTo("Net: 1(0x01)"));
+                Assert.That(new Net(2).ToStringDetailed(), Is.EqualTo("Net: 2(0x02)"));
+                Assert.That(new Net(15).ToStringDetailed(), Is.EqualTo("Net: 15(0x0f)"));
+                Assert.That(new Net(16).ToStringDetailed(), Is.EqualTo("Net: 16(0x10)"));
             });
         }
 

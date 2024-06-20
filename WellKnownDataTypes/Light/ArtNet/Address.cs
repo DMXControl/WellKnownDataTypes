@@ -57,7 +57,11 @@
         }
         public override string ToString()
         {
-            return $"{Combined}(0x{Combined:x2}) / Subnet: {Subnet}(0x{Subnet:x1}), Universe: {Universe}(0x{Universe:x1})";
+            return Combined.ToString();
+        }
+        public string ToStringDetailed()
+        {
+            return $"Address: {Combined}(0x{Combined:x2}) | {Subnet.ToStringDetailed()}, {Universe.ToStringDetailed()}";
         }
 
         public static bool operator ==(in Address a, in Address b)
