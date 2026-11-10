@@ -8,7 +8,7 @@
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageId>DMXControlProjects.$(AssemblyName)</PackageId>
 	<Title>$(AssemblyName)</Title>
-	<Copyright>Copyright © DMXControl Projects e.V. 2024</Copyright>
+	<Copyright>Copyright © DMXControl Projects e.V. 2026</Copyright>
 	<Company>DMXControl-Projects e.V.</Company>
 	<Authors>Patrick Grote</Authors>
 	<LangVersion>latest</LangVersion>
